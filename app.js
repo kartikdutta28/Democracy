@@ -14,9 +14,12 @@ app.use(bodyParser.json());
 //Set public folder for static files
 app.use(express.static(path.join(__dirname,'public')));
 
-app.use('/',function(req,res){
+app.get('/',function(req,res){
     res.render('index');
 });
+
+let posts = require('./routes/posts');
+app.use('/posts',posts);
 
 app.listen(3000,function(){
     console.log("Server Started at port 3000");
