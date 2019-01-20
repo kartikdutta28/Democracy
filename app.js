@@ -20,6 +20,9 @@ app.get('/',function(req,res){
 
 let posts = require('./routes/posts');
 app.use('/posts',posts);
+let profiles = require('./routes/profiles');
+app.use('/profiles',profiles);
+
 
 app.listen(3000,function(){
     console.log("Server Started at port 3000");

@@ -12,12 +12,12 @@ html
         ul.navbar-nav.mr-auto
           li.nav-item.active
             a.nav-link(href='/posts/add')
-              | Add Post 
+              | Add Posts 
               span.sr-only (current)
           li.nav-item.active
             a.nav-link(href='#') Add Poll
           li.nav-item.active
-            a.nav-link(href='#') Your Leaders
+            a.nav-link(href='/profiles') Your Leaders
           li.nav-item.active
             a.nav-link(href='#') Login
           li.nav-item.active
@@ -30,14 +30,7 @@ html
     br
     br
     br
-    form(method="POST",action="/articles/add")
-      #form-group
-        label Title:
-        input.form-control(name='title',type='text')
-      #form-group
-        label Body:
-        textarea.form-control(name='body')
-      input.btn.btn-primary(type='submit',value='Submit')
+    
     
     script(src='/bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
