@@ -30,7 +30,22 @@ html
     br
     br
     br
-    
+    each leader, i in leaders
+      br
+      .row.justify-content-md-center
+        .card(style='width: 50rem;')
+          img.card-img-top(src="" alt='')
+          .card-body
+            a.btn.btn-primary.font-weight-bolder(href='#', role='button')= leader.name
+            h5.font-weight-bolder Post:-
+            h5= leader.post
+            h5.font-weight-bolder Age:-
+            h5= leader.age
+            h5.font-weight-bolder Education:-  
+              h5= leader.education
+
+      
+
     
     script(src='/bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/bootstrap/dist/js/bootstrap.js')

@@ -2,6 +2,23 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongoose = require('mongoose');
+const config = require('./config/database');
+
+//Connect mongo database usigng mongoose
+mongoose.connect(config.database);
+let db=mongoose.connection;
+
+//Check connection
+db.once('open',function(){
+    console.log('Connected to mongodb');
+})
+
+//Check for db erros
+db.on('error',function(err){
+    console.log(err);
+})
+
 
 //Load view engine
 app.set('views',path.join(__dirname,'views'));
