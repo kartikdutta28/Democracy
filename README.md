@@ -1,1 +1,1 @@
-#A app for people who love democracy and politics
+# A app for people who love democracy and politics
