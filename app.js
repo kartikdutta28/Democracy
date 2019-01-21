@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config/database');
+let Leader=require('./models/leader');
+
 
 //Connect mongo database usigng mongoose
 mongoose.connect(config.database);
@@ -34,7 +36,23 @@ app.use(express.static(path.join(__dirname,'public')));
 app.get('/',function(req,res){
     res.render('index');
 });
+var Pusher = require('pusher');
 
+var pusher = new Pusher({
+  appId: '695685',
+  key: '5e1bf950f632c8c82386',
+  secret: 'e5cd75bfff6ffaa060c7',
+  cluster: 'ap2',
+  encrypted: true
+});
+app.post('/profiles/:id/act', (req, res, next) => {
+        const action = req.body.action;
+        const counter = action === 'UpVote' ? 1 : -1;
+        Leader.updateOne({_id: req.params.id}, {$inc: {vote: counter}}, {}, (err, numberAffected) => {
+            pusher.trigger('post-events', 'postAction', { action: action, postId: req.params.id }, req.body.socketId);
+            res.send('');
+        });
+});
 
 let posts = require('./routes/posts');
 app.use('/posts',posts);
