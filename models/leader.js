@@ -21,6 +21,10 @@ let leaderSchema = mongoose.Schema({
     party:{
       type:String,
       required:true
+    },
+    vote:{
+      type:Number,
+      required:true
     }
 
 });

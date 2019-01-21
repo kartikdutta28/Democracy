@@ -43,6 +43,10 @@ html
             h5= leader.age
             h5.font-weight-bolder Education:-  
               h5= leader.education
+            h5.font-weight-bolder Votes:-  
+            span(id=leader.id)= leader.vote
+            a.button.btn-primary(method='POST' href='/profiles/vote/'+leader.id)
+              | Like
 
       
 

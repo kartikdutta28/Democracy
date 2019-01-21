@@ -35,6 +35,7 @@ app.get('/',function(req,res){
     res.render('index');
 });
 
+
 let posts = require('./routes/posts');
 app.use('/posts',posts);
 let profiles = require('./routes/profiles');
