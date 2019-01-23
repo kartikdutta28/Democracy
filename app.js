@@ -58,6 +58,8 @@ let posts = require('./routes/posts');
 app.use('/posts',posts);
 let profiles = require('./routes/profiles');
 app.use('/profiles',profiles);
+let polls = require('./routes/polls');
+app.use('/polls',polls);
 
 
 app.listen(3000,function(){

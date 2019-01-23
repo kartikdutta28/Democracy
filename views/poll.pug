@@ -28,34 +28,9 @@ html
           button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
     br 
     br
-    br
-    br
-    each leader, i in leaders
-      br
-      .row.justify-content-md-center
-        .card(style='width: 50rem;')
-          .card-body
-            a.btn.btn-primary.font-weight-bolder(href='#', role='button')= leader.name
-            h5.font-weight-bolder Post:-
-            h5= leader.post
-            h5.font-weight-bolder Age:-
-            h5= leader.age
-            h5.font-weight-bolder Education:-  
-              h5= leader.education
-            h5.font-weight-bolder Votes:-  
-            span(id="likes-count-"+leader.id)= leader.vote
-            br
-            a.btn.btn-primary.font-weight-bolder(onclick='actOnPost(event);', data-post-id=leader.id)
-              | UpVote
-
-
-      
-    script(src='https://unpkg.com/axios/dist/axios.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/pusher/4.3.1/pusher.min.js')
+    each poll ,i in polls
+      h1= poll.topic
+    
     script(src='/bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
     script(src='/js/main.js')  
-
-
-    
-  
