@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 let Leader=require('./models/leader');
+let Poll = require('./models/poll')
 
 
 //Connect mongo database usigng mongoose
@@ -53,7 +54,25 @@ app.post('/profiles/:id/act', (req, res, next) => {
             res.send('');
         });
 });
+app.post('/:pollId/vote', (req, res, next) => {
+       const choice = req.body.choice;
+       const identifier = `choices.${choice}.votes`;
+       Poll.update({_id: req.params.pollId}, {$inc: {[identifier]: 1}}, {}, (err, numberAffected) => {
+           let Pusher = require('pusher');
+           let pusher = new Pusher({
+               appId:'695685',
+               key:'5e1bf950f632c8c82386',
+               secret:'e5cd75bfff6ffaa060c7',
+               cluster: 'ap2'
+           });
 
+           let payload = { pollId: req.params.pollId, choice: choice };
+           pusher.trigger('poll-events', 'vote', payload, req.body.socketId);
+
+           res.send('');
+       });
+
+   });
 let posts = require('./routes/posts');
 app.use('/posts',posts);
 let profiles = require('./routes/profiles');

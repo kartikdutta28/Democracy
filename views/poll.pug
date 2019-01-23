@@ -3,7 +3,8 @@ html
   head
     title Democracy
     link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
-  body(background='http://mediad.publicbroadcasting.net/p/shared/npr/styles/x_large/nprshared/201809/645383177.jpg')
+    link(rel='stylesheet' href='/css/style.css')
+  body
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       a.navbar-brand(href='/') Democracy
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
@@ -28,9 +29,33 @@ html
           button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
     br 
     br
-    each poll ,i in polls
-      h1= poll.topic
-    
+    .row
+      each poll, i in polls
+        .col-md-6
+          form(onsubmit='vote(event);', id=poll._id)
+            .panel.panel-primary
+              .panel-heading
+                h3.panel-title
+                  span.glyphicon.glyphicon-arrow-right= poll.topic
+              .panel-body
+                ul.list-group
+                  each choice ,i in poll.choices
+                    li.list-group-item
+                      .radio
+                        label
+                          input(type='radio', name='optionsRadios', value=choice.value) 
+                          | #{choice.value}
+                          .alignright(id='vote-count-'+poll.id+'-'+choice.value)= choice.votes 
+                .panel-footer
+                  input.btn.btn-primary.btn-sm(type='submit', id='vote-btn-'+poll.id, value='Vote')
+
+    //- each poll, i in polls
+    //-     h5= poll.topic
+    //-     each choice ,i in poll.choices
+    //-       h5= choice.value
+    //-       h5= choice.votes
+
+    script(src='https://unpkg.com/axios/dist/axios.min.js')
     script(src='/bower_components/jquery/dist/jquery.js')
     script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
     script(src='/js/main.js')  

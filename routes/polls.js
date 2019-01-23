@@ -7,4 +7,5 @@ router.get('/', (req, res, next) => {
             res.render('poll', { polls: polls });
         });
     });
+    
 module.exports = router;
