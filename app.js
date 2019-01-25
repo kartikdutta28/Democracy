@@ -25,7 +25,7 @@ db.on('error',function(err){
 
 //Load view engine
 app.set('views',path.join(__dirname,'views'));
-app.set('view engine','pug');
+app.set('view engine','hbs');
 
 //Parse application
 app.use(bodyParser.urlencoded({extended:false}));
@@ -72,7 +72,7 @@ app.post('/:pollId/vote', (req, res, next) => {
            res.send('');
        });
 
-   });
+});
 let posts = require('./routes/posts');
 app.use('/posts',posts);
 let profiles = require('./routes/profiles');
