@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-let Leader=require('./models/leader');
-let Poll = require('./models/poll')
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
+
+let Leader=require('./models/leader');
+let Poll = require('./models/poll')
 
 
 //Connect mongo database usigng mongoose
@@ -24,7 +26,6 @@ db.once('open',function(){
 db.on('error',function(err){
     console.log(err);
 })
-
 
 //Load view engine
 app.set('views',path.join(__dirname,'views'));
@@ -66,6 +67,12 @@ app.use(expressValidator({
   }
 }));
 
+//passport config
+require('./config/passport')(passport);
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Set public folder for static files
 app.use(express.static(path.join(__dirname,'public')));
@@ -73,6 +80,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.get('/',function(req,res){
     res.render('index');
 });
+
 var Pusher = require('pusher');
 
 var pusher = new Pusher({
@@ -82,6 +90,8 @@ var pusher = new Pusher({
   cluster: 'ap2',
   encrypted: true
 });
+
+//Setting routes
 let posts = require('./routes/posts');
 app.use('/posts',posts);
 let profiles = require('./routes/profiles');
