@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 let Leader=require('./models/leader');
 let Poll = require('./models/poll')
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 
 //Connect mongo database usigng mongoose
@@ -30,6 +33,39 @@ app.set('view engine','hbs');
 //Parse application
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+//Express session middle ware
+app.use(session({
+  secret:'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+//Express messages middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+//Express Validator middleware
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
 
 //Set public folder for static files
 app.use(express.static(path.join(__dirname,'public')));

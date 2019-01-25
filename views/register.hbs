@@ -15,8 +15,8 @@
                 <li class="nav-item active"><a class="nav-link" href="/posts/add">Add Posts <span class="sr-only">(current)</span></a></li>
                 <li class="nav-item active"><a class="nav-link" href="/polls">Polls</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/profiles">Your Leaders</a></li>
-                <li class="nav-item active"><a class="nav-link" href="#">Login</a></li>
-                <li class="nav-item active"><a class="nav-link" href="#">Register</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/users/login">Login</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/users/register">Register</a></li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
@@ -25,7 +25,30 @@
         </div>
     </nav>
     <br><br><br><br>
-    <h1>Register</h1>
+    {{ errors }}
+    <form method="POST",action='/users/register'>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" name="email">
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" name="password2">
+      </div>
+      <input class="btn btn-primary" type="submit" value="Submit"/>
+    </form>
 
     <script src='/bower_components/jquery/dist/jquery.js'></script>
     <script src='/bower_components/bootstrap/dist/js/bootstrap.js'></script>

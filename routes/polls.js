@@ -14,8 +14,8 @@ var pusher = new Pusher({
 router.get('/', (req, res, next) => {
         Poll.find().exec((err, polls) => {
             res.render('poll', { polls: polls });
-        });
-    });
+          });
+});
 router.post('/:pollId/vote', (req, res, next) => {
   const choice = req.body.choice;
   const identifier = `choices.${choice}.votes`;

@@ -15,8 +15,8 @@
                 <li class="nav-item active"><a class="nav-link" href="/posts/add">Add Posts <span class="sr-only">(current)</span></a></li>
                 <li class="nav-item active"><a class="nav-link" href="/polls">Polls</a></li>
                 <li class="nav-item active"><a class="nav-link" href="/profiles">Your Leaders</a></li>
-                <li class="nav-item active"><a class="nav-link" href="#">Login</a></li>
-                <li class="nav-item active"><a class="nav-link" href="#">Register</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/users/login">Login</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/users/register">Register</a></li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
@@ -36,8 +36,8 @@
                 <h5>{{ this.age }}</h5>
                 <h5 class ="font-weight-bolder">Education:-</h5>
                 <h5>{{ this.education }}</h5>
-                <span id="likes-count-{{ this.id }}">{{ this.vote }}</span>
-               <button onclick="actOnPost(event);" data-post-id="{{ this.id }}">UpVote</button>
+               <button class="btn btn-primary" onclick="actOnPost(event);" data-post-id="{{ this.id }}">UpVote</button>
+               <span class="font-weight-bolder" id="likes-count-{{ this.id }}">{{ this.vote }}</span>
 
             </div>
         </div>
