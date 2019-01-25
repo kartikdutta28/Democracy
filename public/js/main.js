@@ -43,7 +43,7 @@ var vote = function (event) {
   var pollId = event.target.id;
   var choice = event.target.optionsRadios.value;
   // we add the socket ID to our POST data
-  axios.post('/' + pollId + '/vote', {choice: choice, socketId: socketId});
+  axios.post('/polls/' + pollId + '/vote', {choice: choice, socketId: socketId});
   document.querySelector('#vote-btn-' + pollId).disabled = true;
   var voteCount = document.querySelector('#vote-count-' + pollId + '-' + choice);
   voteCount.textContent++;
